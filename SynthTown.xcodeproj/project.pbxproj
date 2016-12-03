@@ -12,7 +12,23 @@
 		79D530F71DEFCC8500C32C4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D530F51DEFCC8500C32C4A /* Main.storyboard */; };
 		79D530F91DEFCC8500C32C4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D530F81DEFCC8500C32C4A /* Assets.xcassets */; };
 		79D530FC1DEFCC8500C32C4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D530FA1DEFCC8500C32C4A /* LaunchScreen.storyboard */; };
+		79D531041DEFCCB000C32C4A /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D531031DEFCCB000C32C4A /* AudioKit.framework */; };
+		79D531051DEFCCB000C32C4A /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79D531031DEFCCB000C32C4A /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79D531061DEFCCB200C32C4A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				79D531051DEFCCB000C32C4A /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		79D530EE1DEFCC8500C32C4A /* SynthTown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynthTown.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		79D530F81DEFCC8500C32C4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79D530FB1DEFCC8500C32C4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79D530FD1DEFCC8500C32C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79D531031DEFCCB000C32C4A /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79D531041DEFCCB000C32C4A /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 		79D530E51DEFCC8400C32C4A = {
 			isa = PBXGroup;
 			children = (
+				79D531031DEFCCB000C32C4A /* AudioKit.framework */,
 				79D530F01DEFCC8500C32C4A /* SynthTown */,
 				79D530EF1DEFCC8500C32C4A /* Products */,
 			);
@@ -74,6 +93,7 @@
 				79D530EA1DEFCC8400C32C4A /* Sources */,
 				79D530EB1DEFCC8400C32C4A /* Frameworks */,
 				79D530EC1DEFCC8400C32C4A /* Resources */,
+				79D531061DEFCCB200C32C4A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +280,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SynthTown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bmarx.SynthTown;
@@ -272,6 +296,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SynthTown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Bmarx.SynthTown;

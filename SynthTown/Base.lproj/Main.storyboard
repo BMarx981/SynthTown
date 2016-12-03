@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SynthTown" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +20,107 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SynthTown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNK-uB-alq">
+                                <rect key="frame" x="127" y="28" width="120" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="wPL-hi-xWd"/>
+                                    <constraint firstAttribute="width" constant="120" id="yqC-TT-nHV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mxR-5B-d7N">
+                                <rect key="frame" x="60" y="77" width="255" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="CcI-gS-ooR"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Saw"/>
+                                    <segment title="Square"/>
+                                    <segment title="Sine"/>
+                                    <segment title="Triangle"/>
+                                </segments>
+                                <connections>
+                                    <action selector="OscSelector:" destination="BYZ-38-t0r" eventType="valueChanged" id="PGk-1n-tkJ"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8xF-4I-Cj4">
+                                <rect key="frame" x="60" y="128" width="255" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="b3U-If-N7X"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Low Pass"/>
+                                    <segment title="Band Pass"/>
+                                    <segment title="High Pass"/>
+                                </segments>
+                                <connections>
+                                    <action selector="FilterSelector:" destination="BYZ-38-t0r" eventType="valueChanged" id="Abo-sS-RL2"/>
+                                </connections>
+                            </segmentedControl>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.7799999999999998" minValue="1.3100000000000001" maxValue="4.2999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="BMW-N9-9HA">
+                                <rect key="frame" x="58" y="229" width="259" height="31"/>
+                                <connections>
+                                    <action selector="OscFreqSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="V8e-en-kYo"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.7799999999999998" minValue="1.3100000000000001" maxValue="4.2999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-E2-HKy">
+                                <rect key="frame" x="58" y="318" width="259" height="31"/>
+                                <connections>
+                                    <action selector="FilterFreqSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="JZI-qI-6zn"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlr-Ke-Q1y">
+                                <rect key="frame" x="147" y="187" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter Freq" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NA7-0B-0wU">
+                                <rect key="frame" x="148.5" y="282" width="77" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wX-V0-kyi">
+                                <rect key="frame" x="172" y="396" width="30" height="30"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="PlayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rWf-Ok-WHe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="trailing" secondItem="8xF-4I-Cj4" secondAttribute="trailing" id="6dV-19-gfg"/>
+                            <constraint firstItem="WNK-uB-alq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Co4-am-QwA"/>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="top" secondItem="vlr-Ke-Q1y" secondAttribute="bottom" constant="21" id="EL3-wC-oMT"/>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="trailing" secondItem="wAb-E2-HKy" secondAttribute="trailing" id="HJz-sU-KL6"/>
+                            <constraint firstItem="wAb-E2-HKy" firstAttribute="top" secondItem="NA7-0B-0wU" secondAttribute="bottom" constant="15" id="Hpw-gj-h47"/>
+                            <constraint firstItem="vlr-Ke-Q1y" firstAttribute="top" secondItem="8xF-4I-Cj4" secondAttribute="bottom" constant="31" id="IZ0-0G-IaM"/>
+                            <constraint firstItem="NA7-0B-0wU" firstAttribute="top" secondItem="BMW-N9-9HA" secondAttribute="bottom" constant="23" id="M24-hy-1nL"/>
+                            <constraint firstItem="8xF-4I-Cj4" firstAttribute="top" secondItem="mxR-5B-d7N" secondAttribute="bottom" constant="23" id="MG3-g8-Agb"/>
+                            <constraint firstItem="3wX-V0-kyi" firstAttribute="top" secondItem="wAb-E2-HKy" secondAttribute="bottom" constant="48" id="NgC-Ww-V2V"/>
+                            <constraint firstItem="8xF-4I-Cj4" firstAttribute="leading" secondItem="mxR-5B-d7N" secondAttribute="leading" id="Pao-Bg-iia"/>
+                            <constraint firstItem="mxR-5B-d7N" firstAttribute="top" secondItem="WNK-uB-alq" secondAttribute="bottom" constant="28" id="SQl-5s-QFh"/>
+                            <constraint firstItem="8xF-4I-Cj4" firstAttribute="trailing" secondItem="mxR-5B-d7N" secondAttribute="trailing" id="gPo-0j-Pt5"/>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="leading" secondItem="8xF-4I-Cj4" secondAttribute="leading" id="hZp-VH-Oio"/>
+                            <constraint firstItem="WNK-uB-alq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="kzq-nZ-tDL"/>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="leading" secondItem="wAb-E2-HKy" secondAttribute="leading" id="lTI-qO-Tug"/>
+                            <constraint firstItem="WNK-uB-alq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mKh-5w-98r"/>
+                            <constraint firstItem="BMW-N9-9HA" firstAttribute="centerX" secondItem="NA7-0B-0wU" secondAttribute="centerX" id="oFv-vs-cC6"/>
+                            <constraint firstItem="vlr-Ke-Q1y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oJS-Je-YVC"/>
+                            <constraint firstItem="wAb-E2-HKy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tuH-5p-dZH"/>
+                            <constraint firstItem="3wX-V0-kyi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v5i-eJ-YGD"/>
+                            <constraint firstItem="vlr-Ke-Q1y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wNi-ew-9X5"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-79.200000000000003" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>
