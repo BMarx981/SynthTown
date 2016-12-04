@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mxR-5B-d7N">
-                                <rect key="frame" x="60" y="77" width="255" height="29"/>
+                                <rect key="frame" x="32" y="77" width="311" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="CcI-gS-ooR"/>
                                 </constraints>
@@ -47,7 +47,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8xF-4I-Cj4">
-                                <rect key="frame" x="60" y="128" width="255" height="29"/>
+                                <rect key="frame" x="32" y="128" width="311" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="b3U-If-N7X"/>
                                 </constraints>
@@ -55,19 +55,20 @@
                                     <segment title="Low Pass"/>
                                     <segment title="Band Pass"/>
                                     <segment title="High Pass"/>
+                                    <segment title="None"/>
                                 </segments>
                                 <connections>
                                     <action selector="FilterSelector:" destination="BYZ-38-t0r" eventType="valueChanged" id="Abo-sS-RL2"/>
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.7799999999999998" minValue="1.3100000000000001" maxValue="4.2999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="BMW-N9-9HA">
-                                <rect key="frame" x="58" y="229" width="259" height="31"/>
+                                <rect key="frame" x="30" y="229" width="315" height="31"/>
                                 <connections>
                                     <action selector="OscFreqSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="V8e-en-kYo"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.7799999999999998" minValue="1.3100000000000001" maxValue="4.2999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-E2-HKy">
-                                <rect key="frame" x="58" y="318" width="259" height="31"/>
+                                <rect key="frame" x="30" y="318" width="315" height="31"/>
                                 <connections>
                                     <action selector="FilterFreqSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="JZI-qI-6zn"/>
                                 </connections>
