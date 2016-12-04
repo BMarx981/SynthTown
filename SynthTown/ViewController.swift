@@ -102,7 +102,6 @@ class ViewController: UIViewController {
             lpFilter = AKKorgLowPassFilter(osc, cutoffFrequency: Double(filterFreq))
             print(String(lpFilter.cutoffFrequency))
             mixer.connect(lpFilter)
-            mixer.
         case 1:
             bpFilter = AKBandPassFilter(osc, centerFrequency: Double(filterFreq))
             mixer.connect(bpFilter)
