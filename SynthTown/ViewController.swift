@@ -12,23 +12,9 @@ import AudioKit
 class ViewController: UIViewController {
     
     //class variables***************************
-    var osc = AKOscillator(waveform: AKTable()) {
-        willSet {
-            osc.stop()
-        }
-        didSet{
-            osc.play()
-        }
-    }
+    var osc = AKOscillator(waveform: AKTable())
     
-    var mixer = AKMixer() {
-        willSet {
-            osc.stop()
-        }
-        didSet{
-            osc.play()
-        }
-    }
+    var mixer = AKMixer()
     
     var lpFilter = AKKorgLowPassFilter(AKOscillator(), cutoffFrequency: 1000.0)
     var bpFilter = AKBandPassFilter(AKOscillator(), centerFrequency: 1000.0)
@@ -41,6 +27,8 @@ class ViewController: UIViewController {
     var mainFreq: Double = 0.0
     
     var filterFreq: Float = 0.0
+    
+    let EMPTYFREQ = 20000.0
     //end class variables************************
     
     //Oscillator Selector
@@ -56,20 +44,13 @@ class ViewController: UIViewController {
         case 3:
             osc = AKOscillator(waveform: AKTable(.triangle))
         default:
-            break;
+            break
         }
         osc.frequency = mainFreq
-        
-        mixer.connect(osc)
     }
     
     //Play button
     @IBAction func PlayButton(_ sender: UIButton) {
-        if firstPlayed == false {
-            firstPlay()
-            sender.setTitle("Stop", for: .normal)
-            sender.setTitleColor(UIColor.red, for: .normal)
-        }
         PlayStop(sender: sender)
     }
     
@@ -100,7 +81,6 @@ class ViewController: UIViewController {
         switch val {
         case 0:
             lpFilter = AKKorgLowPassFilter(osc, cutoffFrequency: Double(filterFreq))
-            print(String(lpFilter.cutoffFrequency))
             mixer.connect(lpFilter)
         case 1:
             bpFilter = AKBandPassFilter(osc, centerFrequency: Double(filterFreq))
@@ -109,7 +89,7 @@ class ViewController: UIViewController {
             hpFilter = AKHighPassFilter(osc, cutoffFrequency: Double(filterFreq))
             mixer.connect(hpFilter)
         case 3:
-            emptyFilter = AKLowPassFilter(osc, cutoffFrequency: 20000.0)
+            emptyFilter = AKLowPassFilter(osc, cutoffFrequency: EMPTYFREQ)
             mixer.connect(emptyFilter)
         default:
             break
@@ -139,13 +119,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func firstPlay() {
-        osc = AKOscillator(waveform: AKTable(.sawtooth))
-        lpFilter = AKKorgLowPassFilter(osc, cutoffFrequency: Double(filterFreq))
-        mixer.connect(lpFilter)
-        osc.play()
-        firstPlayed = true
-    }//end firstPlay
 }//end ViewController class
 
