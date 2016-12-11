@@ -11,42 +11,23 @@ import AudioKit
 
 class ViewController: UIViewController {
     
-    //class variables***************************
-    var osc = AKOscillator(waveform: AKTable())
-    
-    var mixer = AKMixer()
-    
-    var lpFilter = AKKorgLowPassFilter(AKOscillator(), cutoffFrequency: 1000.0)
-    var bpFilter = AKBandPassFilter(AKOscillator(), centerFrequency: 1000.0)
-    var hpFilter = AKHighPassFilter(AKOscillator(), cutoffFrequency: 1000.0)
-    var emptyFilter = AKNode()
-    var selectedFilter = Int()
-    
-    var firstPlayed: Bool = false
-    
-    var mainFreq: Double = 0.0
-    
-    var filterFreq: Float = 0.0
-    
-    let EMPTYFREQ = 20000.0
-    //end class variables************************
-    
+    var synth = Model()
+
     //Oscillator Selector
     @IBAction func OscSelector(_ sender: UISegmentedControl) {
-        let val = sender.selectedSegmentIndex
-        switch val {
+
+        switch sender.selectedSegmentIndex {
         case 0:
-            osc = AKOscillator(waveform: AKTable(.sawtooth))
+            synth.setOscillator(oscType: "saw")
         case 1:
-            osc = AKOscillator(waveform: AKTable(.square))
+            synth.setOscillator(oscType: "square")
         case 2:
-            osc = AKOscillator(waveform: AKTable(.sine))
+            synth.setOscillator(oscType: "sine")
         case 3:
-            osc = AKOscillator(waveform: AKTable(.triangle))
+            synth.setOscillator(oscType: "triangle")
         default:
             break
         }
-        osc.frequency = mainFreq
     }
     
     //Play button
@@ -56,12 +37,13 @@ class ViewController: UIViewController {
     
     //Function PlayStop will stop the synth if its playing or play it if it's stopped
     func PlayStop(sender: UIButton) {
-        if osc.isPlaying {
-            osc.stop()
+        print(synth.mixer.isPlaying)
+        if synth.mixer.isPlaying {
+            synth.StopOsc()
             sender.setTitle("Play", for: .normal)
             sender.setTitleColor(UIColor.blue, for: .normal)
         } else {
-            osc.play()
+            synth.PlayOsc()
             sender.setTitle("Stop", for: .normal)
             sender.setTitleColor(UIColor.red, for: .normal)
         }
@@ -69,28 +51,21 @@ class ViewController: UIViewController {
     
     //OscFreqSlider************************************
     @IBAction func OscFreqSlider(_ sender: UISlider) {
-        osc.frequency = pow(10.0, Double(sender.value))
-        mainFreq = osc.frequency
+        synth.setOscFrequency(freq: pow(10.0, Double(sender.value)))
     }
+    
     
     //FilterSelector*********************************************
     @IBAction func FilterSelector(_ sender: UISegmentedControl) {
-        
-        let val = sender.selectedSegmentIndex
-        selectedFilter = val
-        switch val {
+        switch sender.selectedSegmentIndex {
         case 0:
-            lpFilter = AKKorgLowPassFilter(osc, cutoffFrequency: Double(filterFreq))
-            mixer.connect(lpFilter)
+            synth.setFilter(filterType: "lp")
         case 1:
-            bpFilter = AKBandPassFilter(osc, centerFrequency: Double(filterFreq))
-            mixer.connect(bpFilter)
+            synth.setFilter(filterType: "bp")
         case 2:
-            hpFilter = AKHighPassFilter(osc, cutoffFrequency: Double(filterFreq))
-            mixer.connect(hpFilter)
+            synth.setFilter(filterType: "hp")
         case 3:
-            emptyFilter = AKLowPassFilter(osc, cutoffFrequency: EMPTYFREQ)
-            mixer.connect(emptyFilter)
+            synth.setFilter(filterType: "none")
         default:
             break
         }
@@ -98,21 +73,22 @@ class ViewController: UIViewController {
     
     //Filter Frequency Slider***************************************************
     @IBAction func FilterFreqSlider(_ sender: UISlider) {
-        filterFreq = powf(10.0, sender.value)
-        lpFilter.cutoffFrequency = Double(filterFreq)
-        bpFilter.centerFrequency = Double(filterFreq)
-        hpFilter.cutoffFrequency = Double(filterFreq)
-    }
+        
+        synth.mainFilterFreq = pow(10.0, Double(sender.value))
+//        let newFreq = 
+//        synth.setlpFilterFrequency(freq: newFreq)
+//        synth.sethpFilterFrequency(freq: newFreq)
+//        synth.setbpFilterFrequency(freq: newFreq)
+    }//end filter selector
 
     //viewDidLoad***************************************************************
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        AudioKit.output = mixer
+        AudioKit.output = synth.mixer
         AudioKit.start()
         // Do any additional setup after loading the view, typically from a nib.
-    }
+    }//end viewDidLoad
 
     //didReceiveSomeShit********************************************************
     override func didReceiveMemoryWarning() {
