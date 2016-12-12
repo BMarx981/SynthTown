@@ -32,12 +32,14 @@ class Model {
     var mixer = AKMixer()
     
     init() {
-        mainFilterFreq = 1000.0
+        self.mainFilterFreq = 1000.0
         mainFreq = 1000.0
         osc = AKOscillator(waveform: squareTable, frequency: mainFreq!)
 
         filter = AKLowPassFilter(osc, cutoffFrequency: mainFilterFreq!)
+        
         mixer = AKMixer(filter)
+        setAudioKitOutput(mix: mixer)
         
     }//end init
     
@@ -72,6 +74,7 @@ class Model {
     
     //sets the filter type
     func setFilter(filterType: String) {
+        mixer.stop()
         switch filterType {
             case "lp":
                 filter = AKLowPassFilter(osc, cutoffFrequency: mainFilterFreq!)
@@ -85,10 +88,15 @@ class Model {
                 break
         }
         
-        mixer.stop()
+        
         mixer = AKMixer(filter)
-        mixer.start()
+        setAudioKitOutput(mix: mixer)
     }//end setFilter
+    
+    //sets the mixer to a filter
+    func setMixerInput(filter: AKNode) {
+        
+    }
     
     //sets the frequency of the oscillator
     func setOscFrequency(freq: Double) {
@@ -112,5 +120,15 @@ class Model {
     func setbpFilterFrequency(freq: Double) {
         bpFilter.centerFrequency = freq
         mainFilterFreq = freq
+    }
+    
+    //Starts the audioKit engine
+    func startAudioEngine() {
+        AudioKit.start()
+    }
+    
+    //sets the audio output for the audiokit engine
+    func setAudioKitOutput(mix: AKMixer) {
+        AudioKit.output = mix
     }
 }//end Model class

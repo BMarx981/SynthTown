@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AudioKit
 
 class ViewController: UIViewController {
     
@@ -75,18 +74,13 @@ class ViewController: UIViewController {
     @IBAction func FilterFreqSlider(_ sender: UISlider) {
         
         synth.mainFilterFreq = pow(10.0, Double(sender.value))
-//        let newFreq = pow(10.0, Double(sender.value))
-//        synth.setlpFilterFrequency(freq: newFreq)
-//        synth.sethpFilterFrequency(freq: newFreq)
-//        synth.setbpFilterFrequency(freq: newFreq)
     }//end filter selector
 
     //viewDidLoad***************************************************************
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        AudioKit.output = synth.mixer
-        AudioKit.start()
+        synth.startAudioEngine()
         // Do any additional setup after loading the view, typically from a nib.
     }//end viewDidLoad
 
