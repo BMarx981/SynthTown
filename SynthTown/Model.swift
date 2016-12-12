@@ -53,6 +53,7 @@ class Model {
     
     //sets the oscillator type
     func setOscillator(oscType: String) {
+        osc.stop()
         switch oscType {
             case "saw":
                 self.osc = AKOscillator(waveform: sawTable, frequency: mainFreq!)
@@ -66,7 +67,7 @@ class Model {
                 break
         }
         
-        self.osc.start()
+        osc.start()
     }
     
     //sets the filter type

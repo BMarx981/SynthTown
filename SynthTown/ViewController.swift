@@ -75,7 +75,7 @@ class ViewController: UIViewController {
     @IBAction func FilterFreqSlider(_ sender: UISlider) {
         
         synth.mainFilterFreq = pow(10.0, Double(sender.value))
-//        let newFreq = 
+//        let newFreq = pow(10.0, Double(sender.value))
 //        synth.setlpFilterFrequency(freq: newFreq)
 //        synth.sethpFilterFrequency(freq: newFreq)
 //        synth.setbpFilterFrequency(freq: newFreq)
