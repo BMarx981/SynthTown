@@ -21,14 +21,9 @@ class Model {
     
     var filter = AKNode()
     
-    var lpFilter = AKLowPassFilter(AKOscillator())
-    var bpFilter = AKBandPassFilter(AKOscillator())
-    var hpFilter = AKHighPassFilter(AKOscillator())
-    var blankFilter = AKHighShelfFilter(AKOscillator(), cutOffFrequency: 20000.0)
-    var filterString: String
-    
     var mainFreq: Double?
     var mainFilterFreq: Double?
+    let highShelfFreq: Double
     
     var mixer = AKMixer()
     
@@ -37,7 +32,6 @@ class Model {
         mainFreq = 1000.0
         osc = AKOscillator(waveform: sawTable, frequency: mainFreq!)
 
-        filterString = "lp"
         filter = AKLowPassFilter(osc, cutoffFrequency: mainFilterFreq!)
         
         setMixerInput(filterInput: filter)
@@ -76,17 +70,17 @@ class Model {
     
     //sets the filter type
     func setFilter(filterType: String) {
-        filterString = filterType
         mixer.stop()
+        let filtered = Filters(osc: osc, freq: mainFilterFreq!)
         switch filterType {
             case "lp":
-                filter = AKLowPassFilter(osc, cutoffFrequency: mainFilterFreq!)
+                filter = filtered.setLPFilter(osc: osc, freq: mainFilterFreq!)
             case "bp":
-                filter = AKBandPassFilter(osc, centerFrequency: mainFilterFreq!)
+                filter = filtered.setBPFilter(osc: osc, freq: mainFilterFreq!)
             case "hp":
-                filter = AKHighPassFilter(osc, cutoffFrequency: mainFilterFreq!)
+                filter = filtered.setHPFilter(osc: osc, freq: mainFilterFreq!)
             case "none":
-                filter = blankFilter
+                filter = filtered.setNone(osc: osc, freq: highShelfFreq)
             default:
                 break
         }
@@ -106,26 +100,9 @@ class Model {
         mainFreq = freq
     }
     
-    //FILTER SETUP FUNCTIONS ********************************
-    //sets the frequency of the high pass filter
-    func sethpFilterFrequency(freq: Double) {
-        hpFilter.cutoffFrequency = freq
-        mainFilterFreq = freq
+    func setFilterFreq(freq: Double) {
+        
     }
-    
-    //sets the cuttoff Freqency of the low pass filter
-    func setlpFilterFrequency(freq: Double) {
-        lpFilter.cutoffFrequency = freq
-        mainFilterFreq = freq
-    }
-    
-    //sets the center frequency of the high pass filter
-    func setbpFilterFrequency(freq: Double) {
-        bpFilter.centerFrequency = freq
-        mainFilterFreq = freq
-    }
-    
-    //END FILTER SETUP FUNCTIONS*** END**********************
     
     //Starts the audioKit engine
     func startAudioEngine() {
