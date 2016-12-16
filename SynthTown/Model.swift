@@ -23,8 +23,9 @@ class Model {
     var mixer = AKMixer()
     
     init() {
-        osc = AKOscillator(waveform: AKTable(.sawtooth), frequency: mainFreq)
-        
+        //osc = AKOscillator(waveform: AKTable(.sawtooth), frequency: mainFreq)
+        setOscillator(oscType: "saw")
+        setFilter(filterType: "lp")
         setMixerInput(filterInput: filter)
         setAudioKitOutput(mix: mixer)
         
@@ -80,7 +81,7 @@ class Model {
     
     //sets the mixer to a filter
     func setMixerInput(filterInput: AKNode) {
-        mixer = AKNode() as! AKMixer
+
         mixer = AKMixer(filterInput)
         mixer.start()
     }
