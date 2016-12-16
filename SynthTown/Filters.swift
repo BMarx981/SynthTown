@@ -9,14 +9,18 @@
 import Foundation
 import AudioKit
 
-class Filters {
+class Filters: AKNode {
     
     var lp = AKLowPassFilter(AKOscillator())
     var bp = AKBandPassFilter(AKOscillator())
     var hp = AKHighPassFilter(AKOscillator())
-    var none = AKHighShelfFilter(AKOscillator())
+    var none = AKHighShelfFilter(AKOscillator(), cutOffFrequency: 20000.0)
     
     var f: Double
+    
+    override init () {
+        f = 1000.0
+    }
     
     init(osc: AKNode, freq: Double) {
         f = freq
